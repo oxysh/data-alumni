@@ -1,0 +1,170 @@
+body {
+    background: #F2FBFD;
+}
+
+.title {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 72px;
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 0px;
+    color: #012232;
+}
+
+/* ALL TOP BUTTON */
+.button {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding: 0px 10px;
+    background: #002748;
+    border: 1px solid #002748;
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: left;
+    color: #F2FBFD
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding: 0px 10px;
+    background: #FFFFFF;
+    border: 1px solid #002748;
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: left;
+    color: #F2FBFD
+}
+
+.top-button {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: space-between;
+    margin: 42px 108px 0px 92px;
+}
+
+.idk {
+    position: relative;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+}
+
+/* Sorting dropdown */
+.dropdown {
+    position: absolute;
+    right: 0px;
+}
+
+.sortby {
+    display: none;
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    z-index: 1;
+}
+
+.sortby a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 192px;
+    height: 40px;
+    background: #FFFFFF; 
+    border: 1px solid #002748;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #012232;
+    text-decoration: none;
+}
+
+.dropdown:hover .sortby{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    top: 40px;
+}
+
+.sortby a:hover {background: #FEC155;}
+/* Sorting Dropdown end */
+
+/* Update and Search */
+.update-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* Update and Search end */
+
+/* ALL TOP BUTTON END */
+
+@media only screen and (max-width: 800px) {
+    .title {
+        margin-top: 110px;
+    }
+
+    .top-button {
+        margin: 40px 94px 0px 70px;
+    }
+
+    .idk {
+        margin-bottom: 24px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .title {
+        margin-top: 88px;
+    }
+
+    .top-button {
+        margin: 9px 9px 0px 9px;
+    }
+
+    .idk {
+        margin-bottom: 15px;
+    }
+
+    .update-search {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .update-search .button {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    /* EMBO CIK IKI AKU GANGERTI KOK TEMBUS */
+    .search {
+        width: 100%;
+    }
+
+    .dropdown, .dropdown .button {
+        width: 100%;
+    }
+}
