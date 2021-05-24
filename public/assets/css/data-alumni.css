@@ -1,0 +1,143 @@
+body {
+    overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--polar);
+    border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--green-vougue);
+    border-radius: 6px;
+}
+
+.title {
+    text-align: center;
+}
+
+.top-btn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+}
+
+.top-btn .right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.dropdown-content a {
+    /* border: 1px solid var(--green-vougue); */
+    color: var(--green-vougue);
+    background: var(--polar);
+}
+
+.dropdown-content a:hover {
+    background: var(--selective-yellow);
+}
+
+.btn {
+    width: 200px;
+    height: 40px;
+    justify-content: space-between;
+}
+
+.search {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search button {
+    min-width: 40px;
+    width: 40px !important;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.form-control {
+    width: 160px;
+    height: 40px;
+    justify-content: space-between;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px 27px;
+    padding: 30px;
+    margin: -30px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.25));
+    cursor: pointer;
+    transition: all ease .2s;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 5px;
+    background-color: var(--polar);
+}
+
+span.card-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.card-line {
+    height: 6px;
+    position: relative;
+    width: 100%;
+    background-color: var(--green-vougue);
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+    .content {
+        padding: 30px 70px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    .content {
+        padding: 20px;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block !important;
+    }
+
+    .title {
+        font-size: 32px;
+        padding-bottom: 0px;
+        margin-bottom: -15px;
+    }
+
+    .top-btn,
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .top-btn button,
+    .top-btn .dropdown,
+    .search {
+        width: 100%;
+    }
+}

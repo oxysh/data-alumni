@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        @yield('Daftar Alumni')
+    </title>
+
+    <!-- Primary Style -->
+    <link rel="stylesheet" href="public/assets/css/navtop.css">
+    <link rel="stylesheet" href="public/assets/css/env.css">
+    <link rel="stylesheet" href="public/assets/css/style.css">
+    <link rel="stylesheet" href="public/assets/css/data-alumni.css">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <Style>
+        .update-btn {
+            width: 115px;
+        }
+
+        .grid-col {
+            display: grid;
+            gap: 11px;
+        }
+
+        .grid-row {
+            display: grid;
+            grid-template-columns: 1fr 10fr 2fr 4fr 1fr;
+            gap: 20px 20px;
+            padding: 30px;
+            margin: -30px;
+        }
+
+        .card-body {
+            flex-direction: row;
+        }
+
+        .card-delete {
+            background-color: transparent;
+            border: 0px solid transparent;
+            padding: 21.5px 0 21.5px 0;
+        }
+
+        .text-delete {
+            font-family: Montserrat;
+            font-size: 16px;
+            color: var(--danger);
+            text-decoration: underline;
+        }
+
+        .card-plus {
+            justify-content: center;
+        }
+
+        .card-line {
+            height: 6px;
+            position: relative;
+            width: 100%;
+            background-color: var(--green-vougue);
+        }
+
+        /* Tablet */
+        @media (max-width: 1100px) {
+            .grid-row {
+                gap: 7px;
+            }
+
+            .card-body {
+                padding: 8px;
+            }
+
+            span.card-title {
+                font-size: small;
+            }
+
+            .text-delete {
+                font-size: 0;
+            }
+
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+            span.card-title {
+                font-size: 9px;
+            }
+
+            .grid-row {
+                grid-template-columns: 1fr 4fr 2fr 2fr 1fr;
+                gap: 5px 5px;
+            }
+
+            .card-body {
+                padding: 5px;
+            }
+
+            .grid-col {
+                gap: 5px;
+            }
+
+            .text-delete {
+                font-size: 0;
+            }
+
+            .top-btn button,
+            .top-btn .dropdown,
+            .search {
+                width: 100%;
+            }
+        }
+    </Style>
+</head>
+
+<body>
+    <!-- Nav -->
+    <div class="nav">
+        <div class="nav-mobile">
+            <img src="{{ url('assets/img/btn-burger.png') }}" alt="" class="nav-burger">
+        </div>
+        <div class="nav-group">
+            <!-- @if (Auth::user()) -->
+            <div class="dropdown nav-item" id="nav-user">
+                <!-- <button class="dropbtn">Hello, {{ Auth::User()->email }}<img -->
+                <button class="dropbtn">Hello,<img src="{{ url('assets/img/drop-down.png') }}" /></button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="alert('fitur masih dalam proses')">Ubah Password</a>
+                    <a href="{{ route('auth.logout') }}">LogOut</a>
+                </div>
+            </div>
+            <!-- @else -->
+            <!-- <a href="{{ route('home') }}" class="nav-item active">
+                <span class="nav-text"> Data Alumni </span>
+                <span class="line"></span>
+            </a> -->
+            <!-- @endif -->
+            <!-- @if (Auth::User()) -->
+            <a href="{{ route('form.index') }}" class="nav-item" id="nav-form">
+                <span class="nav-text">Form</span>
+                <span class="line"></span>
+            </a>
+            <!-- @if (Auth::User()->email == 'psdm')
+            <a href="#" onclick="alert('fitur masih dalam proses')" class="nav-item" id="nav-chsi">
+                <span class="nav-text">CHSI</span>
+                <span class="line"></span>
+            </a>
+            {{-- <div class="dropdown active nav-item" id="nav-chsi">
+                <button class="dropbtn">CHSI<img src="{{ url('assets/img/drop-down.png') }}" /></button>
+                <div class="dropdown-content">
+                    <a href="{{ route('chsi.admin.index') }}">Index</a>
+                    <a href="#">Curhat</a>
+                    <a href="#">Kritik Saran</a>
+                    <a href="#">Meditasi</a>
+                </div>
+            </div> --}} -->
+            <!-- @else -->
+            <a href="{{ route('chsi.admin.kritik.index') }}" class="nav-item" id="nav-krisar">
+                <a href="#" onclick="alert('fitur masih dalam proses')" class="nav-item" id="nav-krisar">
+                    <span class="nav-text">Kritik Saran</span>
+                    <span class="line"></span>
+                </a>
+                <!-- @endif -->
+                <!-- @endif -->
+                <!-- @if (!Auth::User()) -->
+                <!-- <a href="{{ route('login') }}" class="nav-item">
+                    <span class="nav-text">Login</span>
+                    <span class="line"></span>
+                </a> -->
+                <!-- @endif -->
+
+
+                <!-- {{-- <div class="dropdown active nav-item" id="nav-new-feature">
+                    <button class="dropbtn">New Feature<img src="{{ url('assets/img/drop-down.png') }}" /></button>
+                    <div class="dropdown-content">
+                        <a href="{{ route('f.form.index') }}">Form</a>
+                        <a href="{{ route('chsi.index') }}">Curhat - CHSI</a>
+                        <a href="#">Kritik Saran</a>
+                        <a href="#">Meditasi</a>
+                    </div>
+                </div> --}} -->
+                <a href="{{ route('home') }}" class="nav-item active">
+                    <span class="nav-text"> Data Alumni </span>
+                    <span class="line"></span>
+                </a>
+        </div>
+
+    </div>
+    <!-- Nav end -->
+
+    <!-- View Data Alumni -->
+    <div class="content">
+        <h2 class="title">Daftar Alumni</h2>
+        <div class="top-btn">
+            <div></div>
+            <div class="right">
+                <div class="dropdown">
+                    <button class="dropbtn btn btn-primary">Sort <img
+                            src="public/assets/img/drop-down-ylw.svg" /></button>
+                    <div class="dropdown-content">
+                        <a href="#">Nama</a>
+                        <a href="#">Tahun Masuk</a>
+                        <a href="#">Pekerjaan Saat Ini</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary">Update Data <img src="public/assets/img/plus.svg"></button>
+            </div>
+            <div class="search">
+                <input class="form-control search" type="text" placeholder="Search">
+                <button class="btn btn-primary"><img src="public/assets/img/search.svg"></button>
+            </div>
+        </div>
+
+        <div class="grid-col">
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">01</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nabil Mustofa</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">1998</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span class="card-title">Nganggur</span>
+                    </div>
+                    <div class="card-line"></div>
+                </div>
+                <div class="card ">
+                    <div class="card-body card-delete">
+                        <img src="public/assets/img/trash.svg">
+                        <a href="#" class="text-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body card-plus">
+                    <span class="card-title">Tambah data + </span>
+                </div>
+                <div class="card-line"></div>
+            </div>
+
+            <div class="top-btn">
+                <div></div>
+                <div class="right">
+                    <div class="update-btn">
+                        <button class="btn-primary">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- View Data Alumni end -->
+
+</body>
+
+</html>
